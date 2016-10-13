@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  // Top content
+  .top-content
+    .inner-bg
+      .container
+        .row
+          .col-sm-8.col-sm-offset-2.text
+            h1
+              strong SNS Friends Recommender
+            .description
+              p This is a Social Network Friends Recommender System
+        .row
+          .col-sm-5
+            .form-box
+              .form-top
+                .form-top-left
+                  h3 Login to our site
+                  p Enter username and password to log on:
+                .form-top-right
+                  i.fa.fa-lock
+              .form-bottom
+                form.login-form(role='form', action='', method='post')
+                  .form-group
+                    label.sr-only(for='form-username') Username
+                    input#form-username.form-username.form-control(type='text', name='form-username', placeholder='Username...')
+                  .form-group
+                    label.sr-only(for='form-password') Password
+                    input#form-password.form-password.form-control(type='password', name='form-password', placeholder='Password...')
+                  button.btn(type='submit') Sign in!
+            .social-login
+              h3 ...or login with:
+              .social-login-buttons
+                a.btn.btn-link-2(href='#')
+                  i.fa.fa-facebook
+                  |  Facebook
+                a.btn.btn-link-2(href='#')
+                  i.fa.fa-twitter
+                  |  Twitter
+                a.btn.btn-link-2(href='#')
+                  i.fa.fa-google-plus
+                  |  Google Plus
+          .col-sm-1.middle-border
+          .col-sm-1
+          .col-sm-5
+            .form-box
+              .form-top
+                .form-top-left
+                  h3 Sign up now
+                  p Fill in the form below to get instant access:
+                .form-top-right
+                  i.fa.fa-pencil
+              .form-bottom
+                form.registration-form(role='form', action='', method='post')
+                  .form-group
+                    label.sr-only(for='form-email') Email
+                    input#form-email.form-email.form-control(type='text', name='form-email', placeholder='Email...')
+                  .form-group
+                    label.sr-only(for='form-name') First name
+                    input#form-name.form-name.form-control(type='text', name='form-name', placeholder='Name...')
+                  .form-group
+                    label.sr-only(for='form-password') Last name
+                    input#form-password.form-password.form-control(type='password', name='form-password', placeholder='Password...')
+                  button.btn(type='submit') Sign me up!
