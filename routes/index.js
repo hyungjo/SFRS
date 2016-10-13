@@ -9,5 +9,8 @@ router.get('/', function(req, res, next) {
 router.get('/timeline', function(req, res, next) {
   res.render('timeline/index.jade');
 });
+router.get('/test', function(req, res, next) {
+  res.render('timeline/test.jade');
+});
 
 module.exports = router;

@@ -20,8 +20,9 @@ html(lang='en')
     script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
     script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
   style.
-    @import url(//fonts.googleapis.com/css?family=Open+Sans);
+    @import url('//fonts.googleapis.com/css?family=Open+Sans');
     body {
+    padding-top: 60px;
     margin: 5px 20px;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNiIgaGVpZ2h0PSI2Ij4KPHJlY3Qgd2lkdGg9IjYiIGhlaWdodD0iNiIgZmlsbD0iI2VlZWVlZSI+PC9yZWN0Pgo8ZyBpZD0iYyI+CjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjMiIGZpbGw9IiNlNmU2ZTYiPjwvcmVjdD4KPHJlY3QgeT0iMSIgd2lkdGg9IjMiIGhlaWdodD0iMiIgZmlsbD0iI2Q4ZDhkOCI+PC9yZWN0Pgo8L2c+Cjx1c2UgeGxpbms6aHJlZj0iI2MiIHg9IjMiIHk9IjMiPjwvdXNlPgo8L3N2Zz4=");
     font-family: 'Open Sans';
@@ -178,6 +179,9 @@ html(lang='en')
     float: none !important;
     }
     @media (max-width: 767px) {
+    body {
+    padding-top: 0px;
+    }
     ul.timeline:before {
     left: 40px;
     }
@@ -224,7 +228,159 @@ html(lang='en')
     }
     }
   body
-    block content
+    #wrapper
+      // Navigation
+      nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='index.html') SFRS
+        // Top Menu Items
+        ul.nav.navbar-right.top-nav
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              i.fa.fa-envelope
+              b.caret
+            ul.dropdown-menu.message-dropdown
+              li.message-preview
+                a(href='#')
+                  .media
+                    span.pull-left
+                      img.media-object(src='http://placehold.it/50x50', alt='')
+                    .media-body
+                      h5.media-heading
+                        strong UserName
+                      p.small.text-muted
+                        i.fa.fa-clock-o
+                        |  Yesterday at 4:32 PM
+                      p Lorem ipsum dolor sit amet, consectetur...
+              li.message-preview
+                a(href='#')
+                  .media
+                    span.pull-left
+                      img.media-object(src='http://placehold.it/50x50', alt='')
+                    .media-body
+                      h5.media-heading
+                        strong John Smith
+                      p.small.text-muted
+                        i.fa.fa-clock-o
+                        |  Yesterday at 4:32 PM
+                      p Lorem ipsum dolor sit amet, consectetur...
+              li.message-preview
+                a(href='#')
+                  .media
+                    span.pull-left
+                      img.media-object(src='http://placehold.it/50x50', alt='')
+                    .media-body
+                      h5.media-heading
+                        strong John Smith
+                      p.small.text-muted
+                        i.fa.fa-clock-o
+                        |  Yesterday at 4:32 PM
+                      p Lorem ipsum dolor sit amet, consectetur...
+              li.message-footer
+                a(href='#') Read All New Messages
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              i.fa.fa-bell
+              b.caret
+            ul.dropdown-menu.alert-dropdown
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-default Alert Badge
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-primary Alert Badge
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-success Alert Badge
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-info Alert Badge
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-warning Alert Badge
+              li
+                a(href='#')
+                  | Alert Name 
+                  span.label.label-danger Alert Badge
+              li.divider
+              li
+                a(href='#') View All
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              i.fa.fa-user
+              |  UserName 
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href='#')
+                  i.fa.fa-fw.fa-user
+                  |  Profile
+              li
+                a(href='#')
+                  i.fa.fa-fw.fa-envelope
+                  |  Inbox
+              li
+                a(href='#')
+                  i.fa.fa-fw.fa-gear
+                  |  Settings
+              li.divider
+              li
+                a(href='#')
+                  i.fa.fa-fw.fa-power-off
+                  |  Log Out
+        // Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.side-nav
+            li.active
+              a(href='index.html')
+                i.fa.fa-fw.fa-dashboard
+                |  My Timeline
+            li
+              a(href='charts.html')
+                i.fa.fa-fw.fa-bar-chart-o
+                |  Timeline
+            li
+              a(href='forms.html')
+                i.fa.fa-fw.fa-edit
+                |  Forms
+            li
+              a(href='bootstrap-elements.html')
+                i.fa.fa-fw.fa-desktop
+                |  Bootstrap Elements
+            li
+              a(href='bootstrap-grid.html')
+                i.fa.fa-fw.fa-wrench
+                |  Bootstrap Grid
+            li
+              a(href='javascript:;', data-toggle='collapse', data-target='#demo')
+                i.fa.fa-fw.fa-arrows-v
+                |  Dropdown 
+                i.fa.fa-fw.fa-caret-down
+              ul#demo.collapse
+                li
+                  a(href='#') Dropdown Item
+                li
+                  a(href='#') Dropdown Item
+            li
+              a(href='blank-page.html')
+                i.fa.fa-fw.fa-file
+                |  Blank Page
+            li
+              a(href='index-rtl.html')
+                i.fa.fa-fw.fa-dashboard
+                |  RTL Dashboard
+      block content
   
   footer
     .container
