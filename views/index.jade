@@ -21,13 +21,13 @@ block content
                 .form-top-right
                   i.fa.fa-lock
               .form-bottom
-                form.login-form(role='form', action='', method='post')
+                form.login-form(role='form', action='/auth/login', method='post')
                   .form-group
-                    label.sr-only(for='form-username') Username
-                    input#form-username.form-username.form-control(type='text', name='form-username', placeholder='Username...')
+                    label.sr-only(for='form-email') E-mail
+                    input#form-email.form-email.form-control(type='text', name='username', placeholder='E-mail...')
                   .form-group
                     label.sr-only(for='form-password') Password
-                    input#form-password.form-password.form-control(type='password', name='form-password', placeholder='Password...')
+                    input#form-password.form-password.form-control(type='password', name='password', placeholder='Password...')
                   button.btn(type='submit') Sign in!
             .social-login
               h3 ...or login with:
@@ -52,14 +52,14 @@ block content
                 .form-top-right
                   i.fa.fa-pencil
               .form-bottom
-                form.registration-form(role='form', action='', method='post')
+                form.registration-form(role='form', action='/auth/register', method='post')
                   .form-group
                     label.sr-only(for='form-email') Email
-                    input#form-email.form-email.form-control(type='text', name='form-email', placeholder='Email...')
+                    input#form-email.form-email.form-control(type='text', name='email', placeholder='Email...')
                   .form-group
                     label.sr-only(for='form-name') First name
-                    input#form-name.form-name.form-control(type='text', name='form-name', placeholder='Name...')
+                    input#form-name.form-name.form-control(type='text', name='username', placeholder='Username...')
                   .form-group
                     label.sr-only(for='form-password') Last name
-                    input#form-password.form-password.form-control(type='password', name='form-password', placeholder='Password...')
+                    input#form-password.form-password.form-control(type='password', name='password', placeholder='Password...')
                   button.btn(type='submit') Sign me up!

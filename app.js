@@ -1,12 +1,20 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+var flash = require('connect-flash');
+var redis = require('redis');
+var RedisStore = require('connect-redis')(session);
 
-var routes = require('./routes/index');
-//var users = require('./routes/users');
+var routes = require('./routes');
+
+var Account = require('./models/account');
 
 var app = express();
 
@@ -24,8 +32,50 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Redis Settings
+var redisClient = redis.createClient({host: 'localhost', port: 6379, db:0});
+redisClient.auth('RAYWCQUXJBFWYDCY');
+app.use(session({
+    secret: 'keyboard cat',
+    store: new RedisStore({
+      client: redisClient
+    }),
+    resave: false,
+    saveUninitialized: false
+}));
+redisClient.on('connect', function() {
+    console.log('Connected to Redis...');
+});
+redisClient.on('end', function() {
+    console.log('Disconnected to Redis...');
+});
+redisClient.on('error', function(err) {
+    console.log('Redis Error ' + err);
+});
+
+//Passport Settings
+app.use(passport.initialize());
+app.use(flash());
+app.use(passport.session());
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+//MongoDB Settings
+var dbName = 'sfrs';
+var connectionString = 'mongodb://localhost/' + dbName;
+mongoose.connect(connectionString);
+mongoose.connection.on('connected', function() {
+	  console.log("Connected to MongoDB...");
+});
+mongoose.connection.on('disconnected', function(err) {
+	  console.log("Disconnected to MongoDB");
+});
+mongoose.connection.on('error', function(err) {
+	  console.log("MongoDB Error " + err);
+});
+
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
