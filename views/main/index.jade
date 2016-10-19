@@ -1,0 +1,49 @@
+extends ./layout
+                                                                                                                                                          
+block content
+    #page-wrapper
+      form.posting(role='form', action='/posting/create', method='post', enctype="multipart/form-data")
+        .form-group
+          input.form-control(type="text", name="title", placeholder="Title...")
+        .form-group
+          textarea.form-control(rows="2", name="description", placeholder="Message...")
+        .form-group
+          img.img-rounded.img-thumbnail#imgpreview(src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=")
+        .form-group
+          label.btn.btn-default.btn-file.form-control Image Browser
+            input(type="file", style="display: none;", name="imgfile", onchange="readURL(this)")
+        .form-group
+          input.form-control.btn.btn-primary(type="submit", value="Write", onclick="displayLoading()")
+          
+      .container.loader(style="display:none")
+      ul.timeline
+        - for(var i = 0; i < postings.length; i++) {
+          - if(i % 2 == 0)
+            li
+          - else
+            li.timeline-inverted
+          .timeline-badge
+            a
+              i.fa.fa-circle(id='')
+          .timeline-panel
+            .timeline-heading
+              h4 #{postings[i].title}
+            .timeline-body
+              p #{postings[i].description}
+              p
+                img.img-responsive(src="/tool/img/" + postings[i].imgDir)
+            .timeline-footer
+              p.text-right #{postings[i].postingDate}
+              p.text-right #{postings[i].username}
+        - }
+            li.clearfix.no-float
+      p.footer
+        | Icons by 
+        a(href='http://fortawesome.github.io/Font-Awesome/') FontAwesome 4.1 Icons
+        | .
+        br
+        |   Created by 
+        a(href='http://jenniferperrin.com') Jennifer Perrin
+    // /#page-wrapper
+  // /#wrapper
+  

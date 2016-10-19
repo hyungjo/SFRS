@@ -23,8 +23,8 @@ block content
               .form-bottom
                 form.login-form(role='form', action='/auth/login', method='post')
                   .form-group
-                    label.sr-only(for='form-email') E-mail
-                    input#form-email.form-email.form-control(type='text', name='username', placeholder='E-mail...')
+                    label.sr-only(for='form-email') Username
+                    input#form-email.form-email.form-control(type='text', name='username', placeholder='Username...')
                   .form-group
                     label.sr-only(for='form-password') Password
                     input#form-password.form-password.form-control(type='password', name='password', placeholder='Password...')
@@ -54,12 +54,12 @@ block content
               .form-bottom
                 form.registration-form(role='form', action='/auth/register', method='post')
                   .form-group
-                    label.sr-only(for='form-email') Email
-                    input#form-email.form-email.form-control(type='text', name='email', placeholder='Email...')
+                    label.sr-only(for='form-username') Username
+                    input#form-username.form-username.form-control(type='text', name='username', placeholder='Username...')
                   .form-group
-                    label.sr-only(for='form-name') First name
-                    input#form-name.form-name.form-control(type='text', name='username', placeholder='Username...')
-                  .form-group
-                    label.sr-only(for='form-password') Last name
+                    label.sr-only(for='form-password') Password
                     input#form-password.form-password.form-control(type='password', name='password', placeholder='Password...')
+                  .form-group
+                    label.sr-only(for='form-email') E-mail
+                    input#form-email.form-email.form-control(type='text', name='email', placeholder='E-mail...')
                   button.btn(type='submit') Sign me up!

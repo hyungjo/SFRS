@@ -1,0 +1,16 @@
+extends ./layout
+                                                                                                                                                          
+block content
+  #sample
+    #myDiagramDiv(style='border: solid 1px blue; width:100%; height:300px;')
+    button#SaveButton(onclick='save()') Save
+    button(onclick='load()') Load
+    button(onclick='layoutAll()') Layout
+    br
+    textarea#mySavedModel(style='width:100%;height:400px;display:none')
+      | { "class": "go.TreeModel",
+      | "nodeDataArray": [
+      | {"key":0, "text":"User Interest", "loc":"-96 -72", "scale":1.3310000000000004, "font":"bold 13px sans-serif"},
+      | {"text":"Interest 1", "parent":0, "key":-2, "loc":"32.413574218750085 -113", "dir":"right"}
+      | ]
+      | }
