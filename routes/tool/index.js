@@ -9,7 +9,7 @@ var fs = require('fs');
 router.get('/img/:imgdir', function(req, res, next) {
   fs.readFile('./uploads/'+req.params.imgdir, function(err, data){
     if(err)
-      console.log('==========' + err);
+      console.log(err);
     res.writeHead(200, { 'Content-Type': 'text/html'});
     res.end(data);
   });

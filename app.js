@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var flash = require('connect-flash');
 var redis = require('redis');
 var RedisStore = require('connect-redis')(session);

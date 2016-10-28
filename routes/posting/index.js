@@ -27,7 +27,8 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
   });
 
   request.get('http://localhost:3000/tool/img/tag/' + req.file.filename, function(err, responses, body) {
-    console.log(util.inspect(body, false, null))
+    posting.imgTags = JSON.parse(body);
+    //console.log(util.inspect(body, false, null));
     posting.save(function(err){
       if(err)
         console.log(err);
