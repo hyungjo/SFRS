@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/read', function(req, res, next) {
-  Interest.find({}, {_id:false}, function(err, doc){
+  Interest.find({username: req.session.username}, {_id:false}, function(err, doc){
     if(err)
       console.log(err)
     res.send(JSON.stringify(doc[0]));
@@ -16,13 +16,18 @@ router.get('/read', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next) {
+  console.log('body', req.body);
   var userInterest = new Interest(req.body);
-  //userInterest.username = req.session.username;
-
-  userInterest.save(function(err, interest){
+  userInterest.username = req.session.username;
+  Interest.remove({username: req.session.username}, function(err){
     if(err)
       console.log(err);
-    res.send(interest);
+      userInterest.save(function(err, interest){
+        if(err)
+          console.log(err);
+        console.log(nterest);
+        res.send(interest);
+      });
   });
 });
 

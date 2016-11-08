@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("assets/img/backgrounds/1.jpg");
+    $.backstretch("/assets/img/backgrounds/1.jpg");
     init();
 
     /*
@@ -350,15 +350,43 @@ function layoutAll() {
   }
   // Show the diagram's model in JSON format
 function save() {
-  document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+  //document.getElementById("mySavedModel").value = myDiagram.model.toJson();
   //console.log(myDiagram.model.toJson());
-  xhttp.open("POST", "/account/upload", true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("interest=" + myDiagram.model.toJson());
+  // xhttp.open("POST", "/account/upload", true);
+  // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // xhttp.send("interest=" + myDiagram.model.toJson());
+
+  $.ajax({
+    url: "/interest/create",
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    data: myDiagram.model.toJson(),
+    success: function(result){
+        alert(myDiagram.model.toJson());
+        $('#mySavedModel').val(myDiagram.model.toJson());
+    },error: function(err){
+        alert(err);
+    }
+  });
+
   myDiagram.isModified = false;
 }
 
 function load() {
-  myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
-  console.log(document.getElementById("mySavedModel").value);
+  $.ajax({
+    url: "/interest/read",
+    method: "get",
+    success: function(result){
+        myDiagram.model = go.Model.fromJson(result);
+        $('#mySavedModel').val(result);
+        //alert(result);
+    },error: function(err){
+        alert(err);
+    }
+  });
+
+  //myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+  //console.log(document.getElementById("mySavedModel").value);
 }

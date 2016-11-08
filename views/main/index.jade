@@ -32,6 +32,8 @@ block content
               p #{postings[i].description}
               p
                 img.img-responsive(src="/tool/img/" + postings[i].imgDir)
+                -for(var j = 0; j < postings[i].imgTags.length; j++)
+                  span.label.label-success #{postings[i].imgTags[j]}
             .timeline-footer
               p.text-right #{postings[i].postingDate}
               p.text-right #{postings[i].username}

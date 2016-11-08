@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 
 var Interest = new Schema({
   username: String,
-  interestname: String,
   class: String,
   nodeDataArray: [{
     text: String,
