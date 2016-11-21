@@ -14,7 +14,6 @@ jQuery(document).ready(function() {
     });
 
     $('.login-form').on('submit', function(e) {
-
     	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
     		if( $(this).val() == "" ) {
     			e.preventDefault();
@@ -24,7 +23,6 @@ jQuery(document).ready(function() {
     			$(this).removeClass('input-error');
     		}
     	});
-
     });
 
     /*
@@ -35,7 +33,6 @@ jQuery(document).ready(function() {
     });
 
     $('.registration-form').on('submit', function(e) {
-
     	$(this).find('input[type="text"], textarea').each(function(){
     		if( $(this).val() == "" ) {
     			e.preventDefault();
@@ -46,7 +43,56 @@ jQuery(document).ready(function() {
     		}
     	});
     });
+
+    /*
+    User Profile
+    */
+    // $(".btn-pref.btn").click(function () {
+    //     alert("aaa");
+    //     $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+    //     // $(".tab").addClass("active"); // instead of this do the below
+    //     //$(this).removeClass("btn-default").addClass("btn-primary");
+    // });
+
 });
+
+//친구 추가
+function addFriendButton(value, row) {
+  var formmat;
+  $.ajax({
+    url: "/friend/read/" + row.username,
+    method: "get",
+    async: false,
+    success: function(result){
+      if(result.status == "me")
+        format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart">나</i></button>';
+      if(result.status == "notfriend")
+        format = '<button type="button" class="btn btn-default" onclick=addFriend("' + row.username + '")><i class="glyphicon glyphicon-user"></i>추가</button>';
+      else
+        format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart">친구</i></button>';
+    },error: function(err){
+        alert(err);
+        console.log(err);
+    }
+  });
+
+  return format;
+}
+
+function addFriend(friend) {
+  $.ajax({
+    url: "/friend/add",
+    method: "post",
+    data: {friendName: friend},
+    success: function(result){
+        alert(friend + " 친구 추가 완료");
+    },error: function(err){
+        alert(err);
+        console.log(err);
+    }
+  });
+  location.reload();
+}
 
 function readURL(input) {
 		if (input.files && input.files[0]) {

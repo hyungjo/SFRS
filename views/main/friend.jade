@@ -1,0 +1,13 @@
+extends ./layout
+                                                                                                                                                          
+block content
+    #page-wrapper
+      table(data-toggle='table', data-url='/friend/read', data-pagination="true",
+               data-page-list="[5, 10, 20, 50, 100, 200]",
+               data-search="true")
+        thead
+          tr
+            th(data-field='username', data-sortable="true") 사용자 이름
+            th(data-field='email', data-sortable="true") E-mail Address
+            th(data-field='regDate', data-sortable="true") 최초 가입일
+            th(data-formatter='addFriendButton', data-sortable="true") 친구 추가

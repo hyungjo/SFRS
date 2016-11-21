@@ -18,25 +18,58 @@ block content
       .container.loader(style="display:none")
       ul.timeline
         - for(var i = 0; i < postings.length; i++) {
-          - if(i % 2 == 0)
+          - if(i % 2 === 0)
             li
+              .timeline-badge
+                i.glyphicon.glyphicon-check
+              .timeline-panel
+                .timeline-heading
+                  strong
+                    h4.timeline-title #{postings[i].title}
+                .timeline-body
+                  hr(style='width: 100%; color: black; height: 1px;')
+                  p
+                    img.img-responsive(src="/tool/img/" + postings[i].imgDir)
+                  p #{postings[i].description}
+                .timeline-footer
+                  hr(style='width: 100%; color: black; height: 1px;')
+                  small.text-muted
+                    p.text-right Image Tags :: 
+                      -for(var j = 0; j < postings[i].imgTags.length; j++)
+                        span.label.label-success #{postings[i].imgTags[j]}
+                    p.text-right Contents Topic :: 
+                      -for(var k = 0; k < postings[i].txtTopic.length; k++)
+                        span.label.label-primary #{postings[i].txtTopic[k]}
+                    p.text-right
+                      i.glyphicon.glyphicon-time #{postings[i].postingDate}
+                    hr(style='width: 100%; color: black; height: 1px;')
+                    p.text-right #{postings[i].username}
           - else
             li.timeline-inverted
-          .timeline-badge
-            a
-              i.fa.fa-circle(id='')
-          .timeline-panel
-            .timeline-heading
-              h4 #{postings[i].title}
-            .timeline-body
-              p #{postings[i].description}
-              p
-                img.img-responsive(src="/tool/img/" + postings[i].imgDir)
-                -for(var j = 0; j < postings[i].imgTags.length; j++)
-                  span.label.label-success #{postings[i].imgTags[j]}
-            .timeline-footer
-              p.text-right #{postings[i].postingDate}
-              p.text-right #{postings[i].username}
+              .timeline-badge
+                i.glyphicon.glyphicon-check
+              .timeline-panel
+                .timeline-heading
+                  strong
+                    h4.timeline-title #{postings[i].title}
+                .timeline-body
+                  hr(style='width: 100%; color: black; height: 1px;')
+                  p
+                    img.img-responsive(src="/tool/img/" + postings[i].imgDir)
+                  p #{postings[i].description}
+                .timeline-footer
+                  hr(style='width: 100%; color: black; height: 1px;')
+                  small.text-muted
+                    p.text-right Image Tags :: 
+                      -for(var j = 0; j < postings[i].imgTags.length; j++)
+                        span.label.label-success #{postings[i].imgTags[j]}
+                    p.text-right Contents Topic :: 
+                      -for(var k = 0; k < postings[i].txtTopic.length; k++)
+                        span.label.label-primary #{postings[i].txtTopic[k]}
+                    p.text-right
+                      i.glyphicon.glyphicon-time #{postings[i].postingDate}
+                    hr(style='width: 100%; color: black; height: 1px;')
+                    p.text-right #{postings[i].username}
         - }
             li.clearfix.no-float
       p.footer
@@ -48,4 +81,3 @@ block content
         a(href='http://jenniferperrin.com') Jennifer Perrin
     // /#page-wrapper
   // /#wrapper
-  

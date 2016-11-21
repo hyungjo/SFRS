@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 var profile = './configs/gProfile.json';
 var vision = require('google-vision-api-client');
 var requtil = vision.requtil;
-
-var fs = require('fs');
+var AlchemyLanguageV1 = require('watson-developer-cloud/alchemy-language/v1');
+var Activity = require('../../models/activity');
 
 router.get('/img/:imgdir', function(req, res, next) {
   fs.readFile('./uploads/'+req.params.imgdir, function(err, data){

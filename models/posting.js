@@ -9,6 +9,7 @@ var Posting = new Schema({
   description: String,
   imgDir: String,
   imgTags: [String],
+  txtTopic: [String],
   postingDate: {type: Date, default: Date.now}
 });
 

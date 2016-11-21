@@ -5,6 +5,8 @@ var auth = require('./auth');
 var timeline = require('./timeline');
 var posting = require('./posting');
 var interest = require('./interest');
+var friend = require('./friend');
+var user = require('./user');
 var tool = require('./tool');
 
 /* GET home page. */
@@ -16,10 +18,8 @@ router.use('/auth', auth);
 router.use('/timeline', timeline);
 router.use('/posting', posting);
 router.use('/interest', interest);
+router.use('/friend', friend);
+router.use('/user', user);
 router.use('/tool', tool);
-
-router.get('/test', function(req, res, next) {
-  res.render('timeline/test.jade');
-});
 
 module.exports = router;

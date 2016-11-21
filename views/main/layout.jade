@@ -9,11 +9,12 @@ html(lang='en')
   title Social Network Friends Recommender System
   // Bootstrap Core CSS
   link(rel='stylesheet', href='/assets/bootstrap/css/bootstrap.min.css')
+  // Latest compiled and minified CSS
+  link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css')
   // Custom Fonts
   link(rel='stylesheet', href='/assets/font-awesome/css/font-awesome.min.css')
   // Custom CSS
   link(rel='stylesheet', href='/assets/css/sb-admin.css')
-  
   // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
   // WARNING: Respond.js doesn't work if you view the page via file://
   //if lt IE 9
@@ -115,7 +116,7 @@ html(lang='en')
               b.caret
             ul.dropdown-menu
               li
-                a(href='#')
+                a(href='/user')
                   i.fa.fa-fw.fa-user
                   |  Profile
               li
@@ -143,9 +144,9 @@ html(lang='en')
                 i.fa.fa-fw.fa-bar-chart-o
                 |  Timeline
             li
-              a(href='/interest')
+              a(href='/friend')
                 i.fa.fa-fw.fa-bar-chart-o
-                |  Interest
+                |  Friend
             li
               a(href='javascript:;', data-toggle='collapse', data-target='#demo')
                 i.fa.fa-fw.fa-arrows-v
@@ -168,6 +169,8 @@ html(lang='en')
   // Javascript
   script(src='/assets/js/jquery-1.11.1.min.js')
   script(src='/assets/bootstrap/js/bootstrap.min.js')
+  // Latest compiled and minified JavaScript
+  script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js')
   script(src='/assets/js/jquery.backstretch.min.js')
   script(src='/assets/js/go/go.js')
   script(src='/assets/js/scripts.js')

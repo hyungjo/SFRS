@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Interest = require('../../models/interest');
+var Account = require('../../models/account');
 
 router.get('/', function(req, res, next) {
   res.render('main/interest');
@@ -28,6 +29,24 @@ router.post('/create', function(req, res, next) {
         console.log(nterest);
         res.send(interest);
       });
+  });
+});
+
+router.post('/activity/create', function(req, res, next) {
+  Account.findOneAndUpdate({username: req.session.username},
+    {$pushAll: {"activity": req.body.activity}},
+    {upsert: false},
+    function(err, model) {
+      if(err)
+        console.log(err);
+      res.json(model);
+    }
+  );
+});
+
+router.get('/activity/read/:user', function(req, res, next) {
+  Account.findOne({username: req.params.user}, function(err, docs){
+    res.json(docs.activity);
   });
 });
 
