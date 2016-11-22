@@ -7,6 +7,7 @@ var request = require('request');
 var util = require('util');
 
 var Posting = require('../../models/posting');
+var Account = require('../../models/account');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -28,6 +29,8 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
 
   request.get('http://localhost:3000/tool/img/tag/' + req.file.filename, function(err, responses, body) {
     posting.imgTags = JSON.parse(body);
+    var activities = [];
+
     var options = { method: 'POST',
       url: 'http://api.meaningcloud.com/class-1.1',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -41,13 +44,24 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
       var txtTopic = JSON.parse(txtBody);
       var txtTopics = [];
       if (error) throw new Error(error);
-      for(var i = 0; i < txtTopic.category_list.length; i++)
-        txtTopics.push(txtTopic.category_list[0].code);
+      for(var i = 0; i < txtTopic.category_list.length; i++) {
+        txtTopics.push(txtTopic.category_list[i].code);
+        activities.push({"keyword": txtTopic.category_list[i].code});
+      }
       posting.txtTopic = txtTopics;
-      posting.save(function(err){
+      posting.save(function(err, doc){
         if(err)
           console.log(err);
-        res.redirect('/timeline');
+        console.log(doc);
+        Account.findOneAndUpdate({username: req.session.username},
+          {$pushAll: {"activity": activities}},
+          {upsert: false},
+          function(err, model) {
+            if(err)
+              console.log(err);
+            res.redirect('/timeline');
+          }
+        );
       });
     });
   });

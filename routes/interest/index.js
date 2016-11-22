@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Interest = require('../../models/interest');
 var Account = require('../../models/account');
+var Posting = require('../../models/posting');
 
 router.get('/', function(req, res, next) {
   res.render('main/interest');
@@ -33,15 +34,25 @@ router.post('/create', function(req, res, next) {
 });
 
 router.post('/activity/create', function(req, res, next) {
-  Account.findOneAndUpdate({username: req.session.username},
-    {$pushAll: {"activity": req.body.activity}},
-    {upsert: false},
-    function(err, model) {
-      if(err)
-        console.log(err);
-      res.json(model);
-    }
-  );
+  Posting.findOne({_id: req.body.postingId}, function(err, doc){
+    if(err)
+      console.log(err);
+    var activities = [];
+
+    for(var i = 0; i < doc.txtTopic.length; i++)
+      activities.push({"keyword": doc.txtTopic[i]});
+
+    Account.findOneAndUpdate({username: req.session.username},
+      {$pushAll: {"activity": activities}},
+      {upsert: false},
+      function(err, model) {
+        if(err)
+          console.log(err);
+        res.json(model);
+      }
+    );
+  });
+
 });
 
 router.get('/activity/read/:user', function(req, res, next) {

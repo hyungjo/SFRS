@@ -43,6 +43,9 @@ block content
                     p.text-right
                       i.glyphicon.glyphicon-time #{postings[i].postingDate}
                     hr(style='width: 100%; color: black; height: 1px;')
+                    button.btn.btn-default.btn-sm.pull-right(type='button', onclick='addActivity("' + postings[i]._id + '")')
+                      i.glyphicon.glyphicon-heart
+                    hr(style='width: 100%; color: black; height: 1px;')
                     p.text-right #{postings[i].username}
           - else
             li.timeline-inverted
@@ -68,6 +71,9 @@ block content
                         span.label.label-primary #{postings[i].txtTopic[k]}
                     p.text-right
                       i.glyphicon.glyphicon-time #{postings[i].postingDate}
+                    hr(style='width: 100%; color: black; height: 1px;')
+                    button.btn.btn-default.btn-sm.pull-right(type='button', onclick='addActivity("' + postings[i]._id + '")')
+                      i.glyphicon.glyphicon-heart
                     hr(style='width: 100%; color: black; height: 1px;')
                     p.text-right #{postings[i].username}
         - }

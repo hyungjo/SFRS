@@ -94,6 +94,20 @@ function addFriend(friend) {
   location.reload();
 }
 
+function addActivity(posting){
+  $.ajax({
+    url: "/interest/activity/create",
+    method: "post",
+    data: {postingId: posting},
+    success: function(result){
+        alert("좋아요 완료");
+    },error: function(err){
+        alert(err);
+        console.log(err);
+    }
+  });
+}
+
 function readURL(input) {
 		if (input.files && input.files[0]) {
 				var reader = new FileReader();
