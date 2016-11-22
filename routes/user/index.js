@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/activity', function(req, res, next) {
   var activities = [];
-  Account.findOne({username: "hello"}, function(err, doc){
+  Account.findOne({username: req.session.username}, function(err, doc){
     if(err)
       console.log(err);
     for(var i = 0; i < doc.activity.length; i++){

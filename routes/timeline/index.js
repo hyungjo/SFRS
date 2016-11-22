@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/me', function(req, res, next) {
-  Posting.find({email: req.session.email}).sort([['postingDate', 'desc']]).find(function (err, docs) {
+  Posting.find({username: req.session.username}).sort([['postingDate', 'desc']]).find(function (err, docs) {
     if(err)
       console.log('##Error' + err);
 

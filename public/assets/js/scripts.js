@@ -53,8 +53,39 @@ jQuery(document).ready(function() {
     //     // $(".tab").addClass("active"); // instead of this do the below
     //     //$(this).removeClass("btn-default").addClass("btn-primary");
     // });
-
 });
+
+var drawMorrisChart = function() {
+      var activity;
+      var activityData = [];
+      $.ajax({
+        url: "/user/activity",
+        method: "get",
+        async: false,
+        success: function(result){
+          activity = result;
+        },error: function(err){
+            alert(err);
+            console.log(err);
+        }
+      });
+
+    for(key in activity) {
+       activityData.push({"activity": key, "frequency": activity[key]});
+    }
+
+    console.log(activityData);
+		new Morris.Bar({
+        element: 'userActivity',
+        data: activityData,
+        xkey: 'activity',
+        ykeys: ['frequency'],
+        labels: ['Frequency'],
+        hideHover: false,
+        grid: true,
+        axes: true
+      });
+}
 
 //친구 추가
 function addFriendButton(value, row) {

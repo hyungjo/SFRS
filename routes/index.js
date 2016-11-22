@@ -14,6 +14,10 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/test', function(req, res, next) {
+  res.render('main/test');
+});
+
 router.use('/auth', auth);
 router.use('/timeline', timeline);
 router.use('/posting', posting);

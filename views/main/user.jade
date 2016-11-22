@@ -12,11 +12,11 @@ block content
           span.card-title #{username}
       .btn-pref.btn-group.btn-group-justified.btn-group-lg(role='group', aria-label='...')
         .btn-group(role='group')
-          button.stars.btn.btn-default(type='button', href='#tab1', data-toggle='tab')
+          button.stars.btn.btn-default(type='button', href='#tab1', data-toggle='tab', onclick="init()")
             span.glyphicon.glyphicon-star(aria-hidden='true')
             .hidden-xs 관심사
         .btn-group(role='group')
-          button.favorites.btn.btn-default(type='button', href='#tab2', data-toggle='tab')
+          button.favorites.btn.btn-default(type='button', href='#tab2', data-toggle='tab', onclick="drawMorrisChart()")
             span.glyphicon.glyphicon-heart(aria-hidden='true')
             .hidden-xs 활동 정보
       .well
@@ -36,31 +36,7 @@ block content
             | ]
             | }
           #tab2.tab-pane.fade.in
-            .row
-              .progress
-                .progress-bar(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%;')
-                  span.sr-only 60% Complete
-                span.progress-type HTML / HTML5
-                span.progress-completed 60%
-              .progress
-                .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-                  span.sr-only 40% Complete (success)
-                span.progress-type ASP.Net
-                span.progress-completed 40%
-              .progress
-                .progress-bar.progress-bar-info(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
-                  span.sr-only 20% Complete (info)
-                span.progress-type Java
-                span.progress-completed 20%
-              .progress
-                .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
-                  span.sr-only 60% Complete (warning)
-                span.progress-type JavaScript / jQuery
-                span.progress-completed 60%
-              .progress
-                .progress-bar.progress-bar-danger(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
-                  span.sr-only 80% Complete (danger)
-                span.progress-type CSS / CSS3
-                span.progress-completed 80%
+            
+              #userActivity.center-block(style="width:700px;height:400px")
           #tab3.tab-pane.fade.in
               h3 TEST
