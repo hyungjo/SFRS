@@ -2,12 +2,22 @@ extends ./layout
                                                                                                                                                           
 block content
     #page-wrapper
-      table(data-toggle='table', data-url='/friend/read', data-pagination="true",
-               data-page-list="[5, 10, 20, 50, 100, 200]",
-               data-search="true")
+      table#friendTable(data-toggle='table', data-pagination="true", data-page-list="[5, 10, 20, 50, 100, 200]", data-search="true")
         thead
           tr
             th(data-field='username', data-sortable="true") 사용자 이름
             th(data-field='email', data-sortable="true") E-mail Address
             th(data-field='regDate', data-sortable="true") 최초 가입일
-            th(data-formatter='addFriendButton', data-sortable="true") 친구 추가
+            th(data-field='activitySimilarity', data-sortable="true") 활동 유사 점수
+            th(data-field='interestSimilarity', data-sortable="true") 관심사 유사 점수
+            th(data-field='postingCount', data-sortable="true") 포스팅 개수
+            th(data-field='totalSimilarity', data-sortable="true") 최종 유사 점수
+            th(data-field='isFriend', data-formatter='addFriendButtonField', data-sortable="true") 친구 추가
+
+            //- th(data-field='username', data-sortable="true") 사용자 이름
+            //- th(data-field='email', data-sortable="true") E-mail Address
+            //- th(data-field='regDate', data-sortable="true") 최초 가입일
+            //- th(data-formatter='addActivitySimilarityField', data-sortable="true") 활동 유사 점수
+            //- th(data-formatter='addInterestSimilarityField', data-sortable="true") 관심사 유사 점수
+            //- th(data-formatter='addPostingCountField', data-sortable="true") 포스팅 개수
+            //- th(data-formatter='addFriendButtonField', data-sortable="true") 친구 추가

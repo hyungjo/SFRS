@@ -16,7 +16,7 @@ block content
             span.glyphicon.glyphicon-star(aria-hidden='true')
             .hidden-xs 관심사
         .btn-group(role='group')
-          button.favorites.btn.btn-default(type='button', href='#tab2', data-toggle='tab', onclick="drawMorrisChart()")
+          button.favorites.btn.btn-default(type='button', href='#tab2', data-toggle='tab', onclick="showUserActivityChart()")
             span.glyphicon.glyphicon-heart(aria-hidden='true')
             .hidden-xs 활동 정보
       .well
@@ -29,14 +29,13 @@ block content
             br
             h4 모델링된 관심사 표현(Format: JSON)
             textarea#mySavedModel(style='width:100%;height:400px;')
-            | { "class": "go.TreeModel",
-            | "nodeDataArray": [
-            | {"key":0, "text":"User Interest", "loc":"-96 -72", "scale":1.3310000000000004, "font":"bold 13px sans-serif"},
-            | {"text":"Interest 1", "parent":0, "key":-2, "loc":"32.413574218750085 -113", "dir":"right"}
-            | ]
-            | }
+              | { "class": "go.TreeModel",
+              | "nodeDataArray": [
+              | {"key":0, "text":"User Interest", "loc":"-96 -72", "scale":1.3310000000000004, "font":"bold 13px sans-serif"},
+              | {"text":"Interest 1", "parent":0, "key":-2, "loc":"32.413574218750085 -113", "dir":"right"}
+              | ]
+              | }
           #tab2.tab-pane.fade.in
-            
-              #userActivity.center-block(style="width:700px;height:400px")
+            #userActivity(style="")
           #tab3.tab-pane.fade.in
               h3 TEST

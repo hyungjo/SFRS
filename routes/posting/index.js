@@ -18,6 +18,14 @@ var storage = multer.diskStorage({
   }
 });
 
+router.get('/count/:user', function(req, res, next){
+  Posting.find({username: req.params.user}, function(err, docs){
+    if(err)
+      console.log(err);
+    res.json({count: docs.length});
+  });
+});
+
 router.post('/create', multer({ storage: storage}).single('imgfile'), function(req, res, next) {
   var posting = new Posting({
     username: req.session.username,
@@ -40,7 +48,7 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
          model: 'IAB_en' } };
 
     request(options, function (error, response, txtBody) {
-      console.log(JSON.parse(txtBody));
+      //console.log(JSON.parse(txtBody));
       var txtTopic = JSON.parse(txtBody);
       var txtTopics = [];
       if (error) throw new Error(error);
@@ -52,7 +60,7 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
       posting.save(function(err, doc){
         if(err)
           console.log(err);
-        console.log(doc);
+        //console.log(doc);
         Account.findOneAndUpdate({username: req.session.username},
           {$pushAll: {"activity": activities}},
           {upsert: false},

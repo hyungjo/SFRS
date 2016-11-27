@@ -53,63 +53,194 @@ jQuery(document).ready(function() {
     //     // $(".tab").addClass("active"); // instead of this do the below
     //     //$(this).removeClass("btn-default").addClass("btn-primary");
     // });
+
+    //HighChart ReSize Function
+    jQuery(document).on( 'shown.bs.tab', 'button[data-toggle="tab"]', function (e) { // on tab selection event
+      jQuery( "#userActivity" ).each(function() { // target each element with the .contains-chart class
+          var chart = jQuery(this).highcharts(); // target the chart itself
+          chart.reflow() ;// reflow that chart
+      });
+    });
+
 });
 
-var drawMorrisChart = function() {
-      var activity;
-      var activityData = [];
-      $.ajax({
-        url: "/user/activity",
-        method: "get",
-        async: false,
-        success: function(result){
-          activity = result;
-        },error: function(err){
-            alert(err);
-            console.log(err);
-        }
-      });
+function showFriendTable(){
+  var friendData;
 
-    for(key in activity) {
-       activityData.push({"activity": key, "frequency": activity[key]});
-    }
-
-    console.log(activityData);
-		new Morris.Bar({
-        element: 'userActivity',
-        data: activityData,
-        xkey: 'activity',
-        ykeys: ['frequency'],
-        labels: ['Frequency'],
-        hideHover: false,
-        grid: true,
-        axes: true
-      });
-}
-
-//친구 추가
-function addFriendButton(value, row) {
-  var formmat;
   $.ajax({
-    url: "/friend/read/" + row.username,
+    url: "/friend/read",
     method: "get",
     async: false,
     success: function(result){
-      if(result.status == "me")
-        format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart">나</i></button>';
-      if(result.status == "notfriend")
-        format = '<button type="button" class="btn btn-default" onclick=addFriend("' + row.username + '")><i class="glyphicon glyphicon-user"></i>추가</button>';
-      else
-        format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart">친구</i></button>';
+      friendData = result;
+    },error: function(err){
+      alert(err);
+      console.log(err);
+    }
+  });
+
+  for(var i = 0; i < friendData.length; i++){
+    $.ajax({
+      url: "/interest/compare/" + friendData[i].username,
+      method: "get",
+      async: false,
+      success: function(result){
+        friendData[i].interestSimilarity = result.sim.toFixed(2);
+      },error: function(err){
+          console.log(err);
+      }
+    });
+  }
+
+  for(var i = 0; i < friendData.length; i++){
+    $.ajax({
+      url: "/friend/read/" + friendData[i].username,
+      method: "get",
+      async: false,
+      success: function(result){
+        friendData[i].isFriend = result.status;
+      },error: function(err){
+          console.log(err);
+      }
+    });
+  }
+
+  for(var i = 0; i < friendData.length; i++){
+    $.ajax({
+      url: "/user/activity/compare/" + friendData[i].username,
+      method: "get",
+      async: false,
+      success: function(result){
+        friendData[i].activitySimilarity = result.score;
+      },error: function(err){
+          console.log(err);
+      }
+    });
+  }
+
+  for(var i = 0; i < friendData.length; i++){
+    $.ajax({
+      url: "/posting/count/" + friendData[i].username,
+      method: "get",
+      async: false,
+      success: function(result){
+        friendData[i].postingCount = result.count;
+      },error: function(err){
+          console.log(err);
+      }
+    });
+  }
+
+  for(var i = 0; i < friendData.length; i++){
+    friendData[i].totalSimilarity =
+              (friendData[i].interestSimilarity * 100) * 0.6 +
+              (friendData[i].activitySimilarity * 100) * 0.4;
+  }
+
+  $('#friendTable').bootstrapTable({
+    data: friendData
+  });
+}
+
+function showUserActivityChart(){
+  var activity = [];
+  var activityName = [];
+  var activityValue = [];
+
+  $.ajax({
+    url: "/user/activity",
+    method: "get",
+    async: false,
+    success: function(result){
+      activity = result;
     },error: function(err){
         alert(err);
         console.log(err);
     }
   });
 
+  for(key in activity) {
+     activityName.push(key);
+     activityValue.push(activity[key]);
+  }
+
+  $('#userActivity').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'User Activity Graph'
+        },
+        subtitle: {
+            text: '축적된 사용자 활동 누계 자료'
+        },
+        xAxis: {
+            categories: activityName,
+            title: {
+                text: null
+            },
+            labels: {
+                x : 25,
+                y : -25,
+                align: 'left'
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '누계 건 수',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' 건'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: '활동 관심사',
+            data: activityValue
+        }]
+    });
+}
+
+//친구 추가 필드
+function addFriendButtonField(value, row) {
+  var formmat;
+
+  if(row.isFriend == "me")
+    format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-user"> 나 </i></button>';
+  else if(row.isFriend == "notfriend")
+    format = '<button type="button" class="btn btn-default" onclick=addFriend("' + row.username + '")><i class="glyphicon glyphicon-plus"></i> 추가 </button>';
+  else
+    format = '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart"> 친구 </i></button>';
+
   return format;
 }
 
+//친구 추가
 function addFriend(friend) {
   $.ajax({
     url: "/friend/add",
@@ -118,13 +249,13 @@ function addFriend(friend) {
     success: function(result){
         alert(friend + " 친구 추가 완료");
     },error: function(err){
-        alert(err);
         console.log(err);
     }
   });
   location.reload();
 }
 
+//Activity 추가
 function addActivity(posting){
   $.ajax({
     url: "/interest/activity/create",
@@ -455,7 +586,7 @@ function save() {
     },
     data: myDiagram.model.toJson(),
     success: function(result){
-        alert(myDiagram.model.toJson());
+        alert("저장 완료");
         $('#mySavedModel').val(myDiagram.model.toJson());
     },error: function(err){
         alert(err);

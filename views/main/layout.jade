@@ -146,7 +146,7 @@ html(lang='en')
                 i.fa.fa-fw.fa-bar-chart-o
                 |  Timeline
             li
-              a(href='/friend')
+              a(href='/friend' onclick='showFriendTable()')
                 i.fa.fa-fw.fa-bar-chart-o
                 |  Friend
             li
@@ -169,14 +169,19 @@ html(lang='en')
           p Made by 
             strong Hyungjo Seo
   // Javascript
-  script(src='/assets/js/jquery-1.11.1.min.js')
+  //script(src='/assets/js/jquery-1.11.1.min.js')
+  script(src='https://code.jquery.com/jquery-3.1.1.js', integrity='sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=', crossorigin='anonymous')
   script(src='/assets/bootstrap/js/bootstrap.min.js')
   // Latest compiled and minified JavaScript
   script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js')
   script(src='/assets/js/jquery.backstretch.min.js')
   script(src='/assets/js/go/go.js')
   script(src='/assets/js/morris.js')
+  script(src='http://code.highcharts.com/highcharts.js')
+  script(src='http://code.highcharts.com/modules/exporting.js')
   script(src='/assets/js/raphael.js')
   script(src='/assets/js/scripts.js')
+  script('text/javascript').
+    showFriendTable();
   //if lt IE 10
     script(src='/assets/js/placeholder.js')
