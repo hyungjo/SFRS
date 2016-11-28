@@ -19,6 +19,14 @@ router.get('/read', function(req, res, next) {
   });
 });
 
+router.get('/read/:user', function(req, res, next) {
+  Interest.find({username: req.params.user}, {_id:false}, function(err, doc){
+    if(err)
+      console.log(err)
+    res.send(JSON.stringify(doc[0]));
+  });
+});
+
 router.post('/create', function(req, res, next) {
   //console.log('body', req.body);
   var userInterest = new Interest(req.body);

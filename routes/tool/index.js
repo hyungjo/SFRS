@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var path = require('path');
 var profile = './configs/gProfile.json';
 var vision = require('google-vision-api-client');
 var requtil = vision.requtil;

@@ -2,6 +2,8 @@ extends ./layout
                                                                                                                                                           
 block content
     #page-wrapper
+      center
+        h3 여러분의 일상을 올려주세요
       form.posting(role='form', action='/posting/create', method='post', enctype="multipart/form-data")
         .form-group
           input.form-control(type="text", name="title", placeholder="Title...")
