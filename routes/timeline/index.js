@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     if(err)
       console.log('Error' + err);
 
-    res.render('main/index', {username: req.session.username, postings: docs});
+    res.render('timeline/index', {username: req.session.username, postings: docs});
   });
 });
 
@@ -17,7 +17,7 @@ router.get('/me', function(req, res, next) {
     if(err)
       console.log('##Error' + err);
 
-    res.render('main/index', {username: req.session.username, postings: docs});
+    res.render('timeline/index', {username: req.session.username, postings: docs});
   });
 });
 

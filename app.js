@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var compression = require('compression');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -29,6 +30,7 @@ app.locals.pretty = true;
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

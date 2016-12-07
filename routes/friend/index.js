@@ -6,7 +6,7 @@ var request = require('request');
 var Account = require('../../models/account');
 
 router.get('/', function(req, res, next) {
-  res.render('main/friend', {username: req.session.username});
+  res.render('friend/index', {username: req.session.username});
 });
 
 router.get('/read', function(req, res, next) {

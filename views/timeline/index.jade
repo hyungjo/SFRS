@@ -13,7 +13,7 @@ block content
           img.img-rounded.img-thumbnail#imgpreview(src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=")
         .form-group
           label.btn.btn-default.btn-file.form-control Image Browser
-            input(type="file", style="display: none;", name="imgfile", onchange="readURL(this)")
+            input(type="file", style="display: none;", name="imgfile", onchange="readImageFile(this)")
         .form-group
           input.form-control.btn.btn-primary(type="submit", value="Write", onclick="displayLoading()")
           

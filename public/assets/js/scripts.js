@@ -285,7 +285,7 @@ function addActivity(posting){
   });
 }
 
-function readURL(input) {
+function readImageFile(input) {
 		if (input.files && input.files[0]) {
 				var reader = new FileReader();
 

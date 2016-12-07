@@ -8,7 +8,7 @@ var Account = require('../../models/account');
 var Posting = require('../../models/posting');
 
 router.get('/', function(req, res, next) {
-  res.render('main/interest');
+  res.render('user/index');
 });
 
 router.get('/read', function(req, res, next) {

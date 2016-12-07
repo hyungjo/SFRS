@@ -8,15 +8,19 @@ html(lang='en')
   meta(name='author', content='')
   title Social Network Friends Recommender System
   // Bootstrap Core CSS
-  link(rel='stylesheet', href='/assets/bootstrap/css/bootstrap.min.css')
+  //link(rel='stylesheet', href='/assets/bootstrap/css/bootstrap.min.css')
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
   // Latest compiled and minified CSS
   link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css')
   // Custom Fonts
-  link(rel='stylesheet', href='/assets/font-awesome/css/font-awesome.min.css')
+  link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
+  
   // Custom CSS
   link(rel='stylesheet', href='/assets/css/sb-admin.css')
+  
+  //- script(src='/assets/js/friend.js')
   // Morris JS
-  link(rel='stylesheet', href='/assets/css/morris.css')
+  //link(rel='stylesheet', href='/assets/css/morris.css')
   // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
   // WARNING: Respond.js doesn't work if you view the page via file://
   //if lt IE 9
@@ -137,7 +141,7 @@ html(lang='en')
         // Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav.side-nav
-            li.active
+            li
               a(href='/timeline/me')
                 i.fa.fa-fw.fa-dashboard
                 |  My Timeline
@@ -145,20 +149,10 @@ html(lang='en')
               a(href='/timeline')
                 i.fa.fa-fw.fa-bar-chart-o
                 |  Timeline
-            li
-              a(href='/friend' onclick='showFriendTable()')
+            li.active
+              a(href='/friend')
                 i.fa.fa-fw.fa-bar-chart-o
                 |  Friend
-            li
-              a(href='javascript:;', data-toggle='collapse', data-target='#demo')
-                i.fa.fa-fw.fa-arrows-v
-                |  Dropdown 
-                i.fa.fa-fw.fa-caret-down
-              ul#demo.collapse
-                li
-                  a(href='#') Dropdown Item
-                li
-                  a(href='#') Dropdown Item
       block content
   
   footer
@@ -171,15 +165,18 @@ html(lang='en')
   // Javascript
   //script(src='/assets/js/jquery-1.11.1.min.js')
   script(src='https://code.jquery.com/jquery-3.1.1.js', integrity='sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=', crossorigin='anonymous')
-  script(src='/assets/bootstrap/js/bootstrap.min.js')
+  //script(src='/assets/bootstrap/js/bootstrap.min.js')
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
   // Latest compiled and minified JavaScript
   script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js')
-  script(src='/assets/js/jquery.backstretch.min.js')
-  script(src='/assets/js/go/go.js')
-  script(src='/assets/js/morris.js')
+  //script(src='/assets/js/jquery.backstretch.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js')
+  //script(src='/assets/js/go/go.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.6.21/go-debug.js')
+  //script(src='/assets/js/morris.js')
   script(src='http://code.highcharts.com/highcharts.js')
   script(src='http://code.highcharts.com/modules/exporting.js')
-  script(src='/assets/js/raphael.js')
+  //script(src='/assets/js/raphael.js')
   script(src='/assets/js/scripts.js')
   script('text/javascript').
     showFriendTable();

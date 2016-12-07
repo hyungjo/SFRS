@@ -44,7 +44,7 @@ router.post('/create', multer({ storage: storage}).single('imgfile'), function(r
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       form:
        { key: '7656060d9f1ea047e055524c909df0d8',
-         txt: posting.title + ' ' + posting.description,
+         txt: posting.title + ' ' + posting.description + ' ' + posting.imgTags,
          model: 'IAB_en' } };
 
     request(options, function (error, response, txtBody) {

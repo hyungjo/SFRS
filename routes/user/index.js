@@ -6,7 +6,7 @@ var Posting = require('../../models/posting');
 var Account = require('../../models/account');
 
 router.get('/', function(req, res, next) {
-  res.render('main/user', {username: req.session.username});
+  res.render('user/index', {username: req.session.username});
 });
 
 router.get('/activity', function(req, res, next) {
