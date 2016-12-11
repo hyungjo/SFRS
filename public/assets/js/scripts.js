@@ -64,6 +64,71 @@ jQuery(document).ready(function() {
 
 });
 
+function showMorePost(page){
+  var postings;
+  var postingHTML = "";
+  var status;
+
+  $.ajax({
+    url: "/timeline/viewmore?page=" + (parseInt(page) + 1),
+    method: "get",
+    async: false,
+    success: function(result){
+      postings = result.postings;
+      page = result.pageId;
+      status = result.status;
+      console.log(postings);
+    },error: function(err){
+      alert("err");
+      console.log(err);
+    }
+  });
+
+  for(var i = 0; i < postings.length; i++){
+    if($('li:last').hasClass('timeline-inverted'))
+      postingHTML += '<li>';
+    else
+      postingHTML += '<li class = "timeline-inverted">';
+
+    postingHTML += '<div class = "timeline-badge"> <i class = "glyphicon glyphicon-check"></i> </div>';
+    postingHTML += '<div class = "timeline-panel"> <div class = "timeline-heading"> <string> <h4 class = "timeline-title">' + postings[i].title + '</h4> </string> </div>';
+    postingHTML += '<div class = "timeline-body"> <hr style = "width: 100%; color: black; height: 1px;">';
+    postingHTML += '<p> <img class = "img-responsive" src = "/tool/img/' + postings[i].imgDir + '"> </p>';
+    postingHTML += '<p>' + postings[i].description + '</p> </div>';
+    postingHTML += '<div class = "timeline-footer"> <hr style = "width: 100%; color: black; height: 1px;">';
+    postingHTML += '<small class = "text-muted">';
+    postingHTML += '<p class = "text-right"> Image Tags ::';
+    for(var j = 0; j < postings[i].imgTags.length; j++){
+      postingHTML += '<span class = "label label-success">' + postings[i].imgTags[j] + '</span>';
+    }
+    postingHTML += '</p>';
+    postingHTML += '<p class = "text-right"> Contents Tags ::';
+    for(var j = 0; j < postings[i].txtTopic.length; j++){
+      postingHTML += '<span class = "label label-success">' + postings[i].txtTopic[j] + '</span>';
+    }
+    postingHTML += '</p>';
+    postingHTML += '<p class = "text-right"> <i class = "glyphicon glyphicon-time"></i>' + postings[i].postingDate + '</p>';
+    postingHTML += '<hr style = "width: 100%; color: black; height: 1px;">';
+    postingHTML += '<button class = "btn btn-default btn-sm pull-right" type = "button" onclick="addActivity(' + postings[i]._id + ')">';
+    postingHTML += '<i class = "glyphicon glyphicon-heart"></i>';
+    postingHTML += '</button>';
+    postingHTML += '<hr style = "width: 100%; color: black; height: 1px;">';
+    postingHTML += '<p class = "text-right">' + postings[i].username + '</p>';
+    postingHTML += '</small> </div> </div> </li>';
+    $('li:last').after(postingHTML);
+    postingHTML = "";
+  }
+
+  if(status){
+    $('#viewmore').attr('onclick', 'showMorePost("' + (parseInt(page)) + '")');
+  }else {
+    $('#viewmore').remove();
+    // $('#viewmore').attr('class', 'btn btn-success form-control');
+    // $('#viewmore').attr('onclick', '');
+    // $('#viewmore').text('No More Post');
+  }
+}
+
 function showFriendTable(){
   var friendData;
 
