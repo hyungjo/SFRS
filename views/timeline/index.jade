@@ -47,6 +47,8 @@ block content
                     hr(style='width: 100%; color: black; height: 1px;')
                     button.btn.btn-default.btn-sm.pull-right(type='button', onclick='addActivity("' + postings[i]._id + '")')
                       i.glyphicon.glyphicon-heart
+                    button.btn.btn-default.btn-sm.pull-right(type='button', onclick='deletePost("' + postings[i]._id + '")')
+                      i.glyphicon.glyphicon-minus
                     hr(style='width: 100%; color: black; height: 1px;')
                     p.text-right #{postings[i].username}
           - else
@@ -76,6 +78,8 @@ block content
                     hr(style='width: 100%; color: black; height: 1px;')
                     button.btn.btn-default.btn-sm.pull-right(type='button', onclick='addActivity("' + postings[i]._id + '")')
                       i.glyphicon.glyphicon-heart
+                    button.btn.btn-default.btn-sm.pull-right(type='button', onclick='deletePost("' + postings[i]._id + '")')
+                      i.glyphicon.glyphicon-minus
                     hr(style='width: 100%; color: black; height: 1px;')
                     p.text-right #{postings[i].username}
         - }

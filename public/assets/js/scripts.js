@@ -109,8 +109,11 @@ function showMorePost(page){
     postingHTML += '</p>';
     postingHTML += '<p class = "text-right"> <i class = "glyphicon glyphicon-time"></i>' + postings[i].postingDate + '</p>';
     postingHTML += '<hr style = "width: 100%; color: black; height: 1px;">';
-    postingHTML += '<button class = "btn btn-default btn-sm pull-right" type = "button" onclick="addActivity(' + postings[i]._id + ')">';
+    postingHTML += '<button class = "btn btn-default btn-sm pull-right" type = "button" onclick="addActivity(\'' + postings[i]._id + '\')">';
     postingHTML += '<i class = "glyphicon glyphicon-heart"></i>';
+    postingHTML += '</button>';
+    postingHTML += '<button class = "btn btn-default btn-sm pull-right" type = "button" onclick="deletePost(\'' + postings[i]._id + '\')">';
+    postingHTML += '<i class = "glyphicon glyphicon-minus"></i>';
     postingHTML += '</button>';
     postingHTML += '<hr style = "width: 100%; color: black; height: 1px;">';
     postingHTML += '<p class = "text-right">' + postings[i].username + '</p>';
@@ -350,12 +353,33 @@ function addActivity(posting){
   });
 }
 
+function deletePost(posting){
+  $.ajax({
+    url: "/posting/delete",
+    method: "post",
+    data: {postingId: posting},
+    success: function(result){
+      if(result.status == "true"){
+        alert("삭제 완료");
+        location.reload();
+      }else {
+        alert("삭제 실패(자신의 글만 삭제할 수 있습니다)");
+      }
+    },error: function(err){
+        alert(err);
+        console.log(err);
+    }
+  });
+}
+
 function readImageFile(input) {
 		if (input.files && input.files[0]) {
 				var reader = new FileReader();
 
 				reader.onload = function (e) {
 					$('#imgpreview').attr('src', e.target.result);
+          $('#imgpreview').css('min-height', '50px');
+          $('#imgpreview').css('height', '200px');
 				}
 
 				reader.readAsDataURL(input.files[0]);

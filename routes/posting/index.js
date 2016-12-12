@@ -26,6 +26,23 @@ router.get('/count/:user', function(req, res, next){
   });
 });
 
+router.post('/delete', function(req, res, next){
+  Posting.find({username: req.session.username, _id: req.body.postingId}, function(err, docs){
+    if(err)
+      console.log(err);
+    if(docs.length == 0){
+      res.json({status: "false"});
+    }
+    else{
+      Posting.remove({_id: req.body.postingId}, function(err2, docs2){
+        if(err2)
+          console.log(err2);
+        res.json({status: "true"});
+      });
+    }
+  });
+});
+
 router.post('/create', multer({ storage: storage}).single('imgfile'), function(req, res, next) {
   var posting = new Posting({
     username: req.session.username,
